@@ -1,9 +1,7 @@
 #include <QtCore/QCommandLineParser>
 #include <QtGui/QGuiApplication>
 #include <QtQml/QQmlApplicationEngine>
-
 #include <QtQml/QQmlProperty>
-
 #include <QtQml/QQmlContext>
 
 #include "backend.h"
@@ -53,7 +51,7 @@ int main(int argc, char* argv[]) {
       property.write(message);
   });
   server.startServer();
-  back_end.startListening();
+  back_end.connect();
 
   return app.exec();
 }
