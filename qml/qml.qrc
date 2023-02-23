@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>components/BackgroundImage.qml</file>
+        <file>components/DataList.qml</file>
+        <file>components/Speed.qml</file>
+        <file>components/ActionButton.qml</file>
+        <file>components/Finance.qml</file>
+        <file>components/ErrorMessage.qml</file>
+    </qresource>
+</RCC>

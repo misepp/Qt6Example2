@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>assets/Needle.png</file>
+        <file>assets/svgBackgroundCircle.png</file>
+        <file>assets/TopCircle.png</file>
+        <file>assets/SpeedTexture.png</file>
+    </qresource>
+</RCC>
