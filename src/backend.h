@@ -27,7 +27,7 @@ class BackEnd : public QObject {
   QBindable<DataProducerType::DataType> boundDataType() { return &data_type_; }
   DataModel* model();
 
-  void connect();
+  void connectToData();
 
  signals:
   void dataReadingChanged();

@@ -120,6 +120,11 @@ FocusScope {
                         }
                         text: model.data + " " + root.unitText
                     }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: list.currentIndex = index
+                    }
                 }
 
                 Rectangle {

@@ -41,8 +41,6 @@ Item {
         Text {
             id: dataText
 
-            property bool animationHelper: false
-
             anchors.centerIn: parent
             text: root.dataReading + "€"
             font {
@@ -50,9 +48,7 @@ Item {
                 pixelSize: d.smallerFont
             }
 
-            onTextChanged: animationHelper = !animationHelper
-
-            Behavior on animationHelper {
+            Behavior on text {
                 SequentialAnimation {
 
                     NumberAnimation {

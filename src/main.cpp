@@ -51,7 +51,7 @@ int main(int argc, char* argv[]) {
       property.write(message);
   });
   server.startServer();
-  back_end.connect();
+  back_end.connectToData();
 
   return app.exec();
 }

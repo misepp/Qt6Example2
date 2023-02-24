@@ -17,7 +17,7 @@ DataModel* BackEnd::model() {
   return &model_;
 }
 
-void BackEnd::connect() {
+void BackEnd::connectToData() {
   connect(&socket_, &QIODevice::readyRead, this, &BackEnd::readData);
   connect(&socket_, &QAbstractSocket::errorOccurred, this,
           [](const QAbstractSocket::SocketError& err) { qDebug() << "ERROR " << err; });
