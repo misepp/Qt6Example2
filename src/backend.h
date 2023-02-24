@@ -37,8 +37,6 @@ class BackEnd : public QObject {
   void readData();
 
   QTimer timer_;
-  QNetworkAccessManager network_manager_;
-  std::unique_ptr<QNetworkReply> reply_;
   QDataStream in_stream_;
   QTcpSocket socket_;
   DataModel model_;
