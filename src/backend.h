@@ -35,7 +35,6 @@ class BackEnd : public QObject {
 
  private:
   void readData();
-  void calculateSpeed();
 
   QTimer timer_;
   QNetworkAccessManager network_manager_;
