@@ -35,6 +35,6 @@ void BackEnd::readData() {
     return;
   }
 
-  data_reading_ = next_reading.constData();
+  setReading(next_reading.constData());
   model_.insertData(data_reading_);
 }

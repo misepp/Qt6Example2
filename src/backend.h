@@ -2,6 +2,7 @@
 
 #include <QProperty>
 #include <QtCore/QObject>
+#include <QtCore/QProperty>
 #include <QtCore/QTimer>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
@@ -12,29 +13,35 @@
 
 class BackEnd : public QObject {
   Q_OBJECT
-  Q_PROPERTY(DataModel* model READ model CONSTANT)
-  Q_PROPERTY(QVariant dataReading READ dataReading NOTIFY dataReadingChanged BINDABLE boundDataReading)
-  Q_PROPERTY(DataProducerType::DataType dataType READ dataType NOTIFY dataTypeChanged BINDABLE boundDataType)
+  Q_PROPERTY(DataModel *model READ model CONSTANT)
+  Q_PROPERTY(QVariant dataReading READ dataReading NOTIFY dataReadingChanged
+                 BINDABLE boundDataReading)
+  Q_PROPERTY(DataProducerType::DataType dataType READ dataType NOTIFY
+                 dataTypeChanged BINDABLE boundDataType)
 
- public:
-  explicit BackEnd(DataProducerType::DataType type, const quint16 port, const QString& host_address,
-                   QObject* parent = nullptr);
+public:
+  explicit BackEnd(DataProducerType::DataType type, const quint16 port,
+                   const QString &host_address, QObject *parent = nullptr);
 
-  QVariant dataReading() const { return data_reading_.value(); }
-  DataProducerType::DataType dataType() const { return data_type_.value(); }
+  QVariant dataReading() const { return data_reading_; }
+
+  DataProducerType::DataType dataType() const { return data_type_; }
 
   QBindable<QVariant> boundDataReading() { return &data_reading_; }
   QBindable<DataProducerType::DataType> boundDataType() { return &data_type_; }
-  DataModel* model();
+
+  DataModel *model();
 
   void connectToData();
 
- signals:
+signals:
   void dataReadingChanged();
   void dataTypeChanged();
 
- private:
+private:
   void readData();
+  void setReading(const QVariant &data) { data_reading_ = data; }
+  void setDataType(DataProducerType::DataType type) { data_type_ = type; }
 
   QTimer timer_;
   QDataStream in_stream_;
@@ -43,7 +50,6 @@ class BackEnd : public QObject {
 
   quint16 port_{};
   QString host_address_{};
-  Q_OBJECT_BINDABLE_PROPERTY_WITH_ARGS(BackEnd, QVariant, data_reading_, 0, &BackEnd::dataReadingChanged);
-  Q_OBJECT_BINDABLE_PROPERTY_WITH_ARGS(BackEnd, DataProducerType::DataType, data_type_,
-                                       DataProducerType::DataType::SpeedData, &BackEnd::dataTypeChanged);
+  QProperty<QVariant> data_reading_{0};
+  QProperty<DataProducerType::DataType> data_type_{};
 };
