@@ -41,7 +41,7 @@ signals:
 private:
   void readData();
   void setReading(const QVariant &data) { data_reading_ = data; }
-  void setDataType(DataProducerType::DataType type) { data_type_ = type; }
+  void setDataType(const DataProducerType::DataType type) { data_type_ = type; }
 
   QTimer timer_;
   QDataStream in_stream_;
@@ -50,6 +50,11 @@ private:
 
   quint16 port_{};
   QString host_address_{};
-  QProperty<QVariant> data_reading_{0};
-  QProperty<DataProducerType::DataType> data_type_{};
+
+  Q_OBJECT_BINDABLE_PROPERTY_WITH_ARGS(BackEnd, QVariant, data_reading_, 0,
+                                       &BackEnd::dataReadingChanged);
+  Q_OBJECT_BINDABLE_PROPERTY_WITH_ARGS(BackEnd, DataProducerType::DataType,
+                                       data_type_,
+                                       DataProducerType::DataType::SpeedData,
+                                       &BackEnd::dataTypeChanged);
 };
